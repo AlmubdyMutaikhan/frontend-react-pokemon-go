@@ -1,0 +1,30 @@
+.pokemon-container {
+    position: absolute;
+    top: 105%;
+    left: 0;
+    background-color: rgb(243, 235, 235);
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.pokemons-container {
+    height: 100vh;
+    width: 100%;
+    background: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.load {
+    position: absolute;
+    left: 50%;
+    transform: translate(0, -50%); 
+    display: flex;
+    justify-content: center;
+}
