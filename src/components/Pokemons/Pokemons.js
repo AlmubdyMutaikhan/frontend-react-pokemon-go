@@ -1,66 +1,123 @@
-import { Suspense, useEffect, useState } from 'react';
-import React from 'react'
-import './Pokemons.css'
+
+// displays pokemons name
+import { useCallback, useEffect, useRef, useState } from "react/cjs/react.development"
+import useGetPokemons from './hooks/useLoadPokemon';
 import Load from '../animations/loading/Load';
+import './Pokemons.css'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Tilt from 'react-vanilla-tilt'
 
-const Pokemon = React.lazy(()=> (import('../Pokemon/Pokemon')))
+const Pokemons = (props) => {
+    const [loadedPokemons, setLoadedPokemons] = useState(8);
+    const {pokemons, loading, hasMore, totalCount} = useGetPokemons(loadedPokemons);
+    
+    const colors = {
+        fire: '#FDDFDF',
+        grass: '#DEFDE0',
+        electric: '#FCF7DE',
+        water: '#DEF3FD',
+        ground: '#f4e7da',
+        rock: '#d5d5d4',
+        fairy: '#fceaff',
+        poison: '#98d7a5',
+        bug: '#f8d5a3',
+        dragon: '#97b3e6',
+        psychic: '#eaeda1',
+        flying: '#F5F5F5',
+        fighting: '#E6E0D4',
+        normal: '#F5F5F5'
+    };
 
-const Pokemons = () => {
-    const [allPokemons, setAllPokemons] = useState([]);
-    const [loadMoreURI, setLoadMoreURI] = useState('https://pokeapi.co/api/v2/pokemon?limit=25');
-    const [page, setPage] = useState(1);
+    const color = colors[0];
 
-    const loadPokemons = async () => {
-        console.log(loadMoreURI);
-        if(loadMoreURI) {
-            const res = await fetch(loadMoreURI);
-            const data = await res.json();
-            setLoadMoreURI(data.next);
-            function makePokemonObjects(result) {
-                result.forEach(async(pokemon) => {
-                    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
-                    const data = await res.json()
-                    setAllPokemons(prevValue => [...prevValue, data])
-                })
-            }
+    useEffect(()=>{
+        console.log("loading pokemons")
+    }, [loadedPokemons])
 
-            makePokemonObjects(data.results)
-        } else {
-            console.log("invalid URI to fetch data");
+    const observer = useRef();
+
+    const refLoad = useCallback( node => {
+        if(loading) {
+            return
         }
         
-    }
-
-    useEffect(() => {
-        loadPokemons()
-        console.log("loading ")
-    },[page])
-
-    const handleScroll = (e) => {
-        const {scrollTop, scrollHeight, clientHeight} = e.currentTarget;
-        if(Math.ceil(scrollHeight - scrollTop) === clientHeight) {
-            setPage(prev => prev + 1);
+        if(observer.current) {
+            observer.current.disconnect();
         }
 
-    }
+        observer.current = new IntersectionObserver(entries => {
+            if(entries[0].isIntersecting && hasMore) {
+                setLoadedPokemons(totalCount + 1);
+                props.setCount(totalCount);
+            }
+        })
 
-  
-    return(<div className="pokemon-container">
-            <h1>Pokemon section</h1>
-            <div className="pokemons-container"  onScroll={handleScroll}>
+        if(node) {
+            observer.current.observe(node);
+        }
+    });
 
-            <Suspense fallback={<div className="load"><Load /></div>}>
-                {allPokemons.map((val, id) => (
-              <Pokemon
-                                name={val.name}
-                                img={val.sprites.other.dream_world.front_default}
-                                key={id}
-                            /> 
-                ) ) }
-                  </Suspense>
-            </div>
+
+    return(
+        <div className="pokemons-container">
             
-    </div>)
+            <div className="sub-container">
+                {pokemons.map((val, id)=>{
+                    if(id === pokemons.length - 1) {
+                       
+                        return (
+                            <div key={id} ref={refLoad} className="card">
+                                <div className="face">
+                                        <p>{val.name}</p>
+                                        <LazyLoadImage 
+                                            alt={val.name}
+                                            src={val.sprites.other.dream_world.front_default ? val.sprites.other.dream_world.front_default : 'https://vistapointe.net/images/unknown-2.jpg'}
+                                            effect="opacity"
+                                        />
+                                </div>
+                                <div className="content">
+                                <h2>01</h2>
+                                <h3>Card one</h3>
+                                <p> 
+                                </p>
+                                <a href="#">read more</a>
+                                </div>
+                              
+                            </div>
+                        )
+                        
+                    } else {
+                        return (
+                        <Tilt  key={id} style={{background : colors[`${val.types[0].type.name}`]}} options={{ speed: 1000, max: 35,scale : 3 }}>
+                        <div className="card">
+                            
+                                
+                                        <div className="face">
+                                        <p>{val.name}</p>
+                                        <LazyLoadImage 
+                                            alt={val.name}
+                                            src={val.sprites.other.dream_world.front_default ? val.sprites.other.dream_world.front_default : 'https://vistapointe.net/images/unknown-2.jpg'}
+                                            effect="opacity"
+                                        />
+                                        </div>
+
+                                        <div className="content">
+                                            <h2>{val.name}</h2>
+                                            <p> 
+                                                Some description
+                                            </p>
+                                            <a href="#">Discover</a>
+                                        </div>
+
+                                    </div>
+                                    </Tilt>
+                )
+                    }
+                }
+                )}
+            </div>
+        </div>
+    )
 }
 
-export default Pokemons;
+export default Pokemons
