@@ -23,10 +23,10 @@ const Pokemon = ({match}) => {
                     if(!Array.isArray(data)) {
                         res += myJsonToString(data);
                     } else {
-                        res += param + ":\n\t";
+                        res += param + ":\n \t";
                         data.forEach(attr => {
                             if(typeof(attr) !== 'object') {
-                                res += `${attr}:${data[attr]}`;
+                                res += `${attr}: ${data[attr]}`;
                             } else {
                                 if(!Array.isArray(attr)) {
                                     res += myJsonToString(attr);
@@ -37,7 +37,7 @@ const Pokemon = ({match}) => {
                     }
                 }
              } else {
-                 res += `${param}:${data}\n`;
+                 res += `${param}: ${data}\n`;
              }
         });
         
