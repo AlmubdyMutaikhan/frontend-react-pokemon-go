@@ -1,24 +1,26 @@
 
-import { useState } from 'react/cjs/react.development';
+import { BrowserRouter as Router,Switch, Route } from 'react-router-dom';
+
 import './App.css';
+import About from './components/About/About';
 import Navbar from './components/Navbar/Navbar';
-import Pokemons from './components/Pokemons/Pokemons';
+import WrapMainSection from './components/WrapMainSection/WrapMainSection';
+
 function App() {
-  const [totalLoadedPokemons, setTotalLoadedPokemons] = useState(8);
-  const setCount = (count) => {
-    setTotalLoadedPokemons(count);
-  }
+  
 
   return (
-    <div className="app-container">
-        <Navbar/>
-        <div className="show">
-          <span className="top">Total:</span>
-          <h1 className="show">{totalLoadedPokemons}</h1>
-          <span className="bottom">Loaded pokemons:</span>
+    <Router>
+          <div className="app-container">
+            <Navbar/>
+            <Switch>
+              <Route path="/" exact component={WrapMainSection}></Route>
+              <Route path="/about" component={About} />
+            </Switch>
+            
         </div>
-        <Pokemons setCount={setCount}/>
-    </div>
+    </Router>
+    
   );
 }
 

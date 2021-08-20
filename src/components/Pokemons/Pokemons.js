@@ -60,13 +60,15 @@ const Pokemons = (props) => {
 
     return(
         <div className="pokemons-container">
-            
+          <div className="load">   {loading && <Load/>} </div>
             <div className="sub-container">
                 {pokemons.map((val, id)=>{
                     if(id === pokemons.length - 1) {
-                       
+                        
                         return (
+                            
                             <div key={id} ref={refLoad} className="card">
+                              
                                 <div className="face">
                                         <p>{val.name}</p>
                                         <LazyLoadImage 
@@ -88,10 +90,10 @@ const Pokemons = (props) => {
                         
                     } else {
                         return (
-                        <Tilt  key={id} style={{background : colors[`${val.types[0].type.name}`]}} options={{ speed: 1000, max: 35,scale : 3 }}>
+                        <Tilt  key={id} style={{background : colors[`${val.types[0].type.name}`],
+                                                borderRadius: '2rem'
+                        }} options={{ speed: 1000, max: 35,scale : 3 }}>
                         <div className="card">
-                            
-                                
                                         <div className="face">
                                         <p>{val.name}</p>
                                         <LazyLoadImage 
@@ -102,11 +104,11 @@ const Pokemons = (props) => {
                                         </div>
 
                                         <div className="content">
-                                            <h2>{val.name}</h2>
+                                            <h3>Name: {val.name}</h3>
                                             <p> 
-                                                Some description
+                                                Type:{val.types[0].type.name}
                                             </p>
-                                            <a href="#">Discover</a>
+                                            <a href="#" className="btn">Discover</a>
                                         </div>
 
                                     </div>

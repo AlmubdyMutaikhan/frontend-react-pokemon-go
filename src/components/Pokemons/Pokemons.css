@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100&display=swap');
 .pokemons-container {
     position: absolute;
     top: 90px;
@@ -27,11 +29,13 @@
 
 
 .load {
-    position: absolute;
+    position: fixed;
     left: 50%;
-    transform: translate(0, -50%); 
+    top: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
+    z-index: 111111111;
 }
 
 
@@ -39,6 +43,7 @@
 .card {
   position: relative;
   width: 200px;
+ 
   height: 200px;
   margin: 30px;
   box-shadow: 20px 20px 50px rgba(0,0, 0, 0.5);
@@ -48,17 +53,24 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  border-bottom:1px solid rgba(255, 255, 255, 0.5);
+  border-top: 3px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(5px);
 }
 
-
+.card .face p {
+  font-size: 25px;
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 0.5em rgb(28, 248, 112);
+}
 .card .face {
+  font-family: 'Permanent Marker', cursive;
     display: flex;
     position: absolute;
     top: 50%;
     left: 50%;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     transform: translate(-50%, -50%);
     transition: 0.25s;
@@ -75,11 +87,43 @@
 
 
 .card .content {
+  font-family: 'Josefin Sans', sans-serif;
   padding: 20px;
   text-align: center;
   transition: 0.25s;
   transform: translateY(100px);
   opacity: 0;
+}
+
+.card .content h3 {
+
+  font-size: 22px;
+  font-weight: 700;
+  color:rgb(37, 196, 232);
+}
+.card .content p {
+  font-size: 25px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-weight: 700;
+  color:rgb(215, 53, 247);
+}
+
+.card .content a {
+  font-size: 25px;
+  border-radius: 2rem;
+  background: rgb(56, 120, 214);
+  color: white;
+  text-decoration: none;
+  margin-top: 15px;
+  padding: 10px 20px;
+  transition: 0.2s;
+}
+
+.card .content a:hover {
+  background-color: white;
+  color: rgb(56, 120, 214);
+  border : 1px solid rgb(56, 120, 214);
 }
 
 .card:hover .content {

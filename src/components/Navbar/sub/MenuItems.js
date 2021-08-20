@@ -13,7 +13,7 @@ const menuItems = [
     },
     {
         title : "Search",
-        path : "/",
+        path : "/search",
         className
     },
 ]
