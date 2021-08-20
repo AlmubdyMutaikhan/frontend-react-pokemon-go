@@ -6,11 +6,12 @@ import Load from '../animations/loading/Load';
 import './Pokemons.css'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Tilt from 'react-vanilla-tilt'
+import { NavLink } from "react-router-dom";
 
 const Pokemons = (props) => {
     const [loadedPokemons, setLoadedPokemons] = useState(8);
     const {pokemons, loading, hasMore, totalCount} = useGetPokemons(loadedPokemons);
-    
+    const [isOpen, setIsOpen] = useState(false);
     const colors = {
         fire: '#FDDFDF',
         grass: '#DEFDE0',
@@ -105,10 +106,12 @@ const Pokemons = (props) => {
 
                                         <div className="content">
                                             <h3>Name: {val.name}</h3>
+                                            <br/>
+                                            <h4>#{val.id}</h4>
                                             <p> 
                                                 Type:{val.types[0].type.name}
                                             </p>
-                                            <a href="#" className="btn">Discover</a>
+                                            <NavLink to={`pokemons/${val.name}`} className="btn">Discover</NavLink>
                                         </div>
 
                                     </div>
