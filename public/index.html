@@ -44,6 +44,11 @@
     -->
     <script type="text/javascript" src="./vanilla-tilt.js"></script>
     <script type="text/javascript">
+    console.log(navigator.onLine);
+    var ifConnected = window.navigator.onLine;
+    if (!ifConnected) {
+      alert('Connection is not available');
+    } 
     console.log(document.querySelectorAll('.sub-container .card'));
       VanillaTilt.init(document.querySelectorAll(".card"), {
             max: 15,
