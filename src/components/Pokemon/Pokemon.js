@@ -72,8 +72,8 @@ const Pokemon = ({match}) => {
             />
             <h1>{pokemonData.name}</h1>
             </div>
-            <div className="">
-                <h3>Additional data</h3>
+            <div className="additional-info">
+                <h3 style={{color:'white'}}>Additional data</h3>
                 <pre>
                     {jsonData}
                 </pre>
