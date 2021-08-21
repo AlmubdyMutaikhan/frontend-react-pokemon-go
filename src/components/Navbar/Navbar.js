@@ -6,17 +6,16 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
     const [isClickedMenuIcon, setClickedMenuIcon] = useState(false);
     
-    
-    const menuItemsList = menuItems.map((item, id) => (
-        <li className="navbar-li" key={id}>
-            <NavLink className={item.className} to={item.path}>{item.title}</NavLink>
-        </li>
-    ))
-
-
     const handleClick = () => {
         setClickedMenuIcon(!isClickedMenuIcon);
     }
+    
+    const menuItemsList = menuItems.map((item, id) => (
+        <li className="navbar-li" key={id}>
+            <NavLink className={item.className} to={item.path} onClick={handleClick}>{item.title}</NavLink>
+        </li>
+    ))
+
 
     return(
         <div className="navbar">

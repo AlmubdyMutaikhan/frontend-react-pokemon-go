@@ -137,3 +137,42 @@
     color: rgb(56, 120, 214);
     
   }
+
+
+  
+@media screen and (max-width:960px) {
+    .about-container .dev {
+        margin-top: 180px;
+    }
+    .circle2 {
+        position: absolute;
+        bottom: -100px;
+        right: -50px;
+    }
+
+    .about-container .card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .card .desc-list li {
+        margin-bottom: 10px;
+        font-size: 1rem;
+        list-style: none;
+        margin-left: 5%;
+    }
+    .dev {
+        text-align: center;
+    }
+  
+    .purple {
+        text-shadow: 1px 1px 2px blue;
+        background: -webkit-linear-gradient(rgb(169, 52, 247), #0b2e8f);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 25px;
+    }
+  
+ 
+}

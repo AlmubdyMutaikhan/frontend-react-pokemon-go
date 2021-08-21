@@ -17,7 +17,7 @@ const About = () => {
                     <h1 className="about">About developer:</h1>
                     <ul className="desc-list center">
                         <h1 className="name">I am Almubdi</h1>
-                        <h2 className="purple">And I want this project to be approved :)</h2>
+                        <h2 className="purple goal">And I want this project to be approved :)</h2>
                     </ul>
                     <a target="_blank" href="https://upskill.us.qwasar.io/tracks/season-03-frontend-may-2021-20/track_users/1252-mutaikha_a-may-2021-20-79bf/projects/my_pokemon_app" className="btn">Approve</a>
                 </div>
