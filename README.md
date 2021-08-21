@@ -1,4 +1,6 @@
-# Exciting, robust web app built in React.js about Pokemons
+# Exciting, robust web app built in React.js about Pokemons !
+![image](https://user-images.githubusercontent.com/71497569/130319210-5b027865-34ad-48a9-bd17-5cd30de73424.png)
+
 
 # Try it!
 > https://my-pokemon-qwant-app.herokuapp.com/
