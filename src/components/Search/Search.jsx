@@ -63,6 +63,7 @@ const Search = () => {
           <Load />
         </div>
       )}
+      {/* add test */}
       {notFound && <h1 className="center">Not found</h1>}
 
       <div className="form">
